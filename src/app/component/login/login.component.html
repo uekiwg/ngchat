@@ -1,0 +1,36 @@
+<div class="page">
+  <section class="card">
+  	<form class="form-login" (ngSubmit)="submitLogin($event)" #loginForm="ngForm">
+  		<h2 class="form-login-heading">
+  			ログイン
+  		</h2>
+	    <label for="inputEmail" class="sr-only">
+	    	Email address
+	    </label>
+	    <input type="email" name="email" 
+	    	id="inputEmail" class="form-control" 
+	    	placeholder="Email address" 
+	    	[(ngModel)]="login.email" 
+	    	#email="ngModel"
+	    	autocomplete="username email" required autofocus>
+	    <label for="inputPassword" class="sr-only">
+	    	Password
+	    </label>
+	    <input type="password" name="password" 
+	    	id="inputPassword" class="form-control" 
+	    	placeholder="Password" 
+	    	[(ngModel)]="login.password" 
+	    	#password="ngModel"	    	
+	    	autocomplete="new-password" required>
+	    <button class="btn btn-lg btn-info btn-block" type="submit" 
+	    	[disabled]="!loginForm.form.valid">
+	    	LOGIN
+	    </button>
+	</form>
+	<!--
+	<a routerLink="/account/sign-up" class="login-link">
+		アカウントを作る
+	</a>
+	-->
+</section>
+ </div>

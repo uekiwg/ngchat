@@ -1,0 +1,16 @@
+<!--
+<mat-menu #appMenu="matMenu">
+	<button mat-menu-item>NgChat</button>
+</mat-menu>
+-->
+<nav class="navbar fixed-top navbar-dark bg-primary">
+	<a class="navbar-brand" href="#">NgChat</a>
+	<!-- ログイン状態で分岐 -->
+	<span class="navbar-text" *ngIf="!login">
+		<a routerLink="/">Login</a>
+    </span>
+	<span class="navbar-text" *ngIf="login">
+		<a routerLink="/" (click)="logout()">Logout</a>
+    </span>
+    <!-- 分岐ここまで -->
+</nav>
