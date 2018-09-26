@@ -21,4 +21,8 @@ export class LoginComponent implements OnInit {
     this.sessionService.login(this.login);
   }
 
+  loginGoogleAccount(e: Event) {
+    e.preventDefault();
+    this.sessionService.loginGoogleAccount();
+  }
 }
