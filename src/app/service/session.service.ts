@@ -17,6 +17,7 @@ export class SessionService {
   public sessionState = this.sessionSubject.asObservable();
   user: Observable<firebase.User>;
 
+
   constructor(private router: Router, private afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
   }
@@ -63,15 +64,23 @@ export class SessionService {
    * Googleアカウントでログインする。
    */
   loginGoogleAccount() {
+    // this.sessionSubject.next(this.session.reset());で
+    // this.afAuth.authState.subscribe
+    // が実行されるため認証後にフラグをoffにする
+    let signup: boolean = true;
     this.afAuth.authState.subscribe(res => {
       if (res && res.uid) {
+        signup = false;
         this.loggedIn(res.email);
         return this.router.navigate(['/chat']);
       } else {
+        if (!signup) {
+          return;
+        }
         this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
         .then(res => {
-          return this.loggedIn(res.user.email);
-        }).then(() => {
+          signup = false;
+          this.loggedIn(res.user.email);
           return this.router.navigate(['/chat']);
         })
         .catch( err => {
@@ -89,9 +98,7 @@ export class SessionService {
     this.afAuth.auth.signOut()
     .then(() => {
       this.sessionSubject.next(this.session.reset());
-      return this.router.navigate(['']);
-    }).then(() => {
-      //alert('ログアウトしました。');
+      return this.router.navigate(['/']);
     })
     .catch( err => {
       console.log('ログアウトに失敗しました。', err);

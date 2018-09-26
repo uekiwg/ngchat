@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginGoogleAccount(e: Event) {
-    e.preventDefault();
+    //e.preventDefault();
     this.sessionService.loginGoogleAccount();
   }
 }
