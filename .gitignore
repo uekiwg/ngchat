@@ -35,7 +35,7 @@ testem.log
 /typings
 
 #Firebase
-.firebase/*.classpath
+.firebase/*.cache
 
 # System Files
 .DS_Store
