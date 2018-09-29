@@ -57,7 +57,9 @@ export class ChatComponent implements OnInit {
     console.log("currentUserEmail=" + this.currentUserEmail);
 
     // firebase Database のcomment を 画面表示用に変換
-    this.FB_comments = this.db.list('comments');
+    this.FB_comments = this.db.list('comments', ref => 
+      ref.limitToLast(10)
+    );
     this.FB_comments.snapshotChanges().subscribe((actions: any[]) => {
       this.comments = [];
       actions.forEach((action: any) => {
