@@ -36,9 +36,12 @@
         <hr>
       </ng-container>
     </div>
+    <!-- コメント追加後にスクロールさせるためのダミーアンカー -->
+    <a id="comments_bottom" href="#"></a>
   </section>
-
-  <section>
+</div>
+<footer class="fixed-bottom">
+  <section style="max-width: 960px; margin: 0 auto; padding: 10px 0;">
     <form class="chart-form" (submit)="addComment(content)">
       <div class="input-group">
         <input type="text" class="form-control" 
@@ -51,4 +54,4 @@
       </div>
     </form>
   </section>
-</div>
+</footer>

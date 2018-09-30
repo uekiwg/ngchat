@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Comment } from '../../model/models';
@@ -32,6 +32,8 @@ export class ChatComponent implements OnInit {
    */
   public content = '';
 
+  private elements : HTMLElement;
+
   /**
    * コンストラクタ。
    * @param db firebase Database
@@ -39,7 +41,8 @@ export class ChatComponent implements OnInit {
    * @param sessionService セッションサービス
    */
   constructor(private db: AngularFireDatabase, private router: Router
-    ,private sessionService: SessionService) {
+    ,private sessionService: SessionService, private elementRef: ElementRef) {
+      this.elements = elementRef.nativeElement;
   }
 
   /**
@@ -67,6 +70,7 @@ export class ChatComponent implements OnInit {
         const key = action.payload.key;
         this.comments.push(new Comment(val.email, val.content).setData(val.date, key));
       });
+      setTimeout(() => {this.scrollBottom();}, 1000);
     });
   }
 
@@ -78,6 +82,7 @@ export class ChatComponent implements OnInit {
      if (comment) {
        this.FB_comments.push(new Comment(this.currentUserEmail, comment));
        this.content = '';
+       this.scrollBottom();
      }
   }
 
@@ -119,5 +124,13 @@ export class ChatComponent implements OnInit {
     this.FB_comments.remove(key).then(() => {
       //alert('コメントを削除しました');
     });
+  }
+
+  /**
+   * チャットボードを最下部へスクロールする。
+   */
+  scrollBottom(): void {
+    let comments_bottom = this.elements.querySelector("#comments_bottom") as HTMLAnchorElement;
+    comments_bottom.focus();
   }
 }
