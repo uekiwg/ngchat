@@ -25,13 +25,14 @@
 	    <button class="btn btn-lg btn-info btn-block" type="submit" 
 	    	[disabled]="!loginForm.form.valid">
 	    	LOGIN
-	    </button>
+		</button>
+		<br/>
+		<!--
+		<a routerLink="/account/sign-up" class="login-link">
+			アカウントを作る
+		</a>
+		-->
+		<button class="btn btn-lg" (click)="loginGoogleAccount($event)">Googleアカウントでログイン</button>
 	</form>
-	<!--
-	<a routerLink="/account/sign-up" class="login-link">
-		アカウントを作る
-	</a>
-	-->
-	<button class="btn" (click)="loginGoogleAccount($event)">Googleアカウントでログイン</button>
 </section>
  </div>
